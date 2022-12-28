@@ -1,30 +1,37 @@
 import React from "react";
 import moment from "moment/moment";
-import { Button, TextField, Stack, Box } from "@mui/material";
+import { Button, TextField, Stack, Box, Paper } from "@mui/material";
+
 import SendIcon from '@mui/icons-material/Send';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider, StaticDatePicker, DatePicker, MobileDatePicker, DesktopDatePicker } from '@mui/x-date-pickers';
 
 export default function PageWithJSbasedForm() {
 
-  const [value, setValue] = React.useState(moment().format('L'));
+  const [value, setValue] = React.useState(moment());
 
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
+    console.log(event.target.companyName.value)
+
     // Get data from the form.
     const data = {
-      first: event.target.first.value,
-      last: event.target.last.value,
+      appliedDate: value,
+      companyName: event.target.companyName.value,
+      location: event.target.location.value,
+      title: event.target.title.value,
+      skills: event.target.skills.value,
+
     }
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data)
 
     // API endpoint where we send form data.
-    const endpoint = '/api/form'
+    const endpoint = '/api/test/add'
 
     // Form the request for sending data to the server.
     const options = {
@@ -50,19 +57,17 @@ export default function PageWithJSbasedForm() {
     // We pass the event to the handleSubmit() function on submit.
     <form onSubmit={handleSubmit}>
 
-      
-
       {/* <label htmlFor="appliedDate">Applied Date</label>
       <input type="date" id="appliedDate" name="appliedDate" required /> */}
-
+      <Paper elevation={3}>
       <Box
-        component="form"
         sx={{
           '& .MuiTextField-root': { m: 3, width: '25ch' },
         }}
         noValidate
         autoComplete="off"
       >
+
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DatePicker
             disableFuture
@@ -70,6 +75,7 @@ export default function PageWithJSbasedForm() {
             openTo="year"
             views={['year', 'month', 'day']}
             value={value}
+            name="appliedDate"
             onChange={(newValue) => {
               setValue(newValue);
             }}
@@ -80,43 +86,33 @@ export default function PageWithJSbasedForm() {
         <TextField
           required
           id="companyName"
+          name="companyName"
           label="Company Name"
-        // defaultValue="Company name"
         />
         <TextField
           required
           id="location"
+          name="location"
           label="Location"
-        // defaultValue="Company name"
         />
         <TextField
           required
           id="title"
+          name="title"
           label="Job Title"
-        // defaultValue="Company name"
         />
         <TextField
           required
           id="skills"
+          name="skills"
           label="Skills Required"
-        // defaultValue="Company name"
         />
       </Box>
+      </Paper>
+      <Box sx={{ mt: 5 }}>
+        <Button  className="submit-btn" variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
+      </Box>
 
-
-      {/* <label htmlFor="companyName">Company Name</label>
-      <input type="text" id="companyName" name="companyName" required /> */}
-
-      {/* <label htmlFor="location">Location</label>
-      <input type="text" id="location" name="location" required /> */}
-
-      {/* <label htmlFor="title">Job Title</label>
-      <input type="text" id="title" name="title" required /> */}
-
-      {/* <label htmlFor="title">Skills Required</label>
-      <input type="text" id="title" name="title" required /> */}
-
-      <Button className="submit-btn" variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
     </form>
   )
 }

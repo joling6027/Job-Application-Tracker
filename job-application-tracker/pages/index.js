@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import { FormControl,InputLabel, Select } from '@mui/material'
+import { FormControl,InputLabel, Select, Paper } from '@mui/material'
 import PageWithJSbasedForm from './js-form'
 
 // const inter = Inter({ subsets: ['latin'] })
