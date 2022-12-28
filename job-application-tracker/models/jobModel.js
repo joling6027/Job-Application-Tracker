@@ -1,4 +1,7 @@
+import mongoose from "mongoose";
 import { Schema, model, models } from "mongoose";
+import moment from 'moment-timezone';
+
 
 const jobSchema = new Schema({
   appliedDate: {type: String, required: true},
@@ -13,6 +16,8 @@ const jobSchema = new Schema({
   }
 })
 
-const JobApplied = models.JobApplied || model('JobApplied', jobSchema)  //check first if there's a existing model called JobApplied to avoid error
+// const JobApplied = models.JobApplied || model('JobApplied', jobSchema)  //check first if there's a existing model called JobApplied to avoid error
 
-export default JobApplied;
+// export default JobApplied;
+
+module.exports = mongoose.models?.JobApplied || mongoose.model('JobApplied', jobSchema)
