@@ -20,6 +20,8 @@ export default function PageWithJSbasedForm() {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
+    console.log(event.target.status.value)
+
     // console.log(event.target.companyName.value)
     const newValue = moment(value).tz("America/Los_Angeles").format()
     // console.log(newValue);
@@ -31,7 +33,7 @@ export default function PageWithJSbasedForm() {
       location: event.target.location.value,
       title: event.target.title.value,
       skills: event.target.skills.value,
-
+      status: event.target.status.value
     }
 
     // Send the data to the server in JSON format.
@@ -123,6 +125,7 @@ export default function PageWithJSbasedForm() {
             <FormControl sx={{justifyContent:"center", width: 240, mx:3}}>
               {/* <InputLabel id="select-status">Status</InputLabel> */}
               <Select
+                required
                 id="select-status"
                 name="status"
                 defaultValue={"Pending"}

@@ -8,7 +8,8 @@ const jobSchema = new Schema({
   companyName: {type: String, required: true},
   location: { type: String, required: true },
   title: { type: String, required: true },
-  skills: { type: String, required: true }
+  skills: { type: String, required: true },
+  status: {type: String, required: true},
 }, {
   timestamps: {
     createdAt: 'created_at', // Use `created_at` to store the created date

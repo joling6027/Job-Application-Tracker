@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
-import { Box, GridActionsCellItem } from "@mui/material";
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
+import { Box } from "@mui/material";
+import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
+import moment from "moment-timezone";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 // import JobApplied from "../models/jobModel";
@@ -45,48 +45,67 @@ const JobListTable = ({jobs}) => {
       headerName: 'Applied Date',
       width: 150,
       editable: true,
-      sortable: true
+      sortable: true,
+      valueFormatter: params =>
+        moment(params?.value).format("YYYY/MM/DD"),
     },
     {
       field: 'companyName',
       headerName: 'Company name',
-      width: 150,
+      width: 180,
       editable: true,
     },
     {
       field: 'location',
       headerName: 'Location',
-      width: 110,
+      width: 180,
       editable: true,
     },
     {
       field: 'title',
       headerName: 'Job Title',
       sortable: false,
-      width: 110,
+      width: 220,
     },
     {
       field: 'skills',
       headerName: 'Skills Required',
-      width: 150,
+      width: 180,
       editable: true,
     },
     {
-      field: 'Status',
+      field: 'status',
       headerName: 'Status',
-      width: 110,
+      width: 180,
       editable: true,
+      type: "singleSelect",
+      valueOptions: ["Pending", "Rejected", "Interview Scheduled","Offer received"],
     },
+    // {
+    //   field: 'icon_edit', headerName: 'Edit', flex: 1, renderCell: (params) => <EditIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="success" />
+    // },
+    // {
+    //   field: 'icon_delete', headerName: 'Delete', flex: 1, renderCell: (params) => <DeleteIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="error" />
+    // },
     {
-      field: 'icon_edit', headerName: 'Edit', flex: 1, renderCell: (params) => <EditIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="success" />
-    },
-    {
-      field: 'icon_delete', headerName: 'Delete', flex: 1, renderCell: (params) => <DeleteIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="error" />
-    },
-
+      field: 'actions',
+      type: 'actions',
+      width: 50,
+      
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => handleDelete(params.row._id)}
+          color="error"
+        />,
+      ],
+    }
   ];
 
-
+  const handleDelete = (jobid) => {
+      console.log(jobid)
+  }
 
 
   return(
@@ -94,8 +113,8 @@ const JobListTable = ({jobs}) => {
     <DataGrid
       rows={jobs}
       columns={columns}
-      pageSize={5}
-      rowsPerPageOptions={[5]}
+      pageSize={10}
+      rowsPerPageOptions={[10]}
       disableSelectionOnClick
       experimentalFeatures={{ newEditingApi: true }}
       getRowId={Math.random}

@@ -10,7 +10,7 @@ export const getServerSideProps = async () => {
     console.log('CONNECTED TO MONGODB');
 
     console.log('FETCHING DOCUMENT');
-    const jobs = await JobApplied.find();
+    const jobs = await JobApplied.find().sort({ created_at: -1});
 
     console.log('DOCUMENT FETCHED');
 
