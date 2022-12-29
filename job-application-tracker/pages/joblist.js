@@ -1,4 +1,4 @@
-import JobListTable from "../components/table";
+import JobListTable from "./table";
 import connectMongodb from "../utility/connectMongodb";
 import JobApplied from "../models/jobModel";
 
@@ -10,7 +10,7 @@ export const getServerSideProps = async () => {
     console.log('CONNECTED TO MONGODB');
 
     console.log('FETCHING DOCUMENT');
-    const jobs = await JobApplied.find().sort({ created_at: -1});
+    const jobs = await JobApplied.find().sort({ updated_at: -1});
 
     console.log('DOCUMENT FETCHED');
 
@@ -31,6 +31,7 @@ export const getServerSideProps = async () => {
 
 const JobList = ({jobs}) => {
 
+  console.log(jobs)
   return ( 
     <>
       <h1>Job Application List</h1>
