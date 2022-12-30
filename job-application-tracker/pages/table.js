@@ -27,7 +27,7 @@ const JobListTable = ({ jobs }) => {
   const [open, setOpen] = React.useState(false);
   const [deleteJob, setDeleteJob] = React.useState();
   const [message, setMessage] = React.useState();
-  // const [status, setStatus] = React.useState();
+  const [status, setStatus] = React.useState('');
 
   const handleClickOpen = (jobId) => {
     setDeleteJob(jobId)
@@ -84,14 +84,12 @@ const JobListTable = ({ jobs }) => {
           required
           id="select-status"
           name="status"
-          defaultValue={params.row.status}
+          // defaultValue={params.row.status}
+          defaultValue={params.row.status ? params.row.status: "Pending"}
           sx={{ width: "100%", boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
-          onChange={(e) => handleStatusOnChange(e.target.value, params.row.companyName)}
+          onChange={(e) => handleStatusOnChange(e.target.value, params.row.companyName, params.row._id)}
           // value={status}
         >
-          <MenuItem disabled value="">
-            <em>Status</em>
-          </MenuItem>
           <MenuItem value={"Pending"}>Pending</MenuItem>
           <MenuItem value={"Rejected"}>Rejected</MenuItem>
           <MenuItem value={"Interview Scheduled"}>Interview Scheduled</MenuItem>
@@ -131,15 +129,29 @@ const JobListTable = ({ jobs }) => {
     //fetch data again to refresh
     if (data.acknowledged) {
       handleClose();
-      // refreshData();
+      refreshData();
     }
   }
 
-  const handleStatusOnChange = (newStatus, companyName) => {
+  const handleStatusOnChange = async (newStatus, companyName, jobid) => {
     console.log(newStatus);
     //set message for alert
     setMessage(`The status for application at ${companyName} has been changed to "${newStatus}"`)
     //save data to db
+    const statusData = {
+      status: newStatus
+    }
+    const JSONData = JSON.stringify(statusData)
+    const response = await fetch(`/api/test/${jobid}`,{
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSONData
+    })
+    const data = await response.json()
+    console.log(data)
+    refreshData();
   }
 
   // useGridApiEventHandler(apiRef, 'editCellPropsChange', handleCellDataChange);
