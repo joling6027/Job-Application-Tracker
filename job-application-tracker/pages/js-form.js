@@ -4,27 +4,37 @@ import { Button, TextField, Stack, Box, Paper, Grid, Select, MenuItem, InputLabe
 
 import SendIcon from '@mui/icons-material/Send';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { LocalizationProvider, StaticDatePicker, DatePicker, MobileDatePicker, DesktopDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 // import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 
 
 
-export default function PageWithJSbasedForm() {
+export default function EnterJobApplicationForm() {
   moment.tz.setDefault('America/Los_Angeles')
 
   const [value, setValue] = React.useState(moment().tz("America/Los_Angeles").format());
+  const [companyName, setCompanyName] = React.useState();
+  const [title, setTitle] = React.useState();
+  const [location, setLocation] = React.useState();
+  const [skills, setSkills] = React.useState();
+  const [status, setStatus] = React.useState("Pending");
+
+  const resetForm = () => {
+    setLocation("");
+    setCompanyName("");
+    setValue(moment().tz("America/Los_Angeles").format());
+    setTitle("");
+    setSkills("");
+    setStatus("Pending")
+  }
 
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
-    console.log(event.target.status.value)
-
-    // console.log(event.target.companyName.value)
     const newValue = moment(value).tz("America/Los_Angeles").format()
-    // console.log(newValue);
 
     // Get data from the form.
     const data = {
@@ -63,10 +73,12 @@ export default function PageWithJSbasedForm() {
     const result = await response.json()
     console.log(result)
     alert(`Your data sending status: ${result.success}`)
+    // event.target.reset();
+    resetForm();
   }
   return (
     // We pass the event to the handleSubmit() function on submit.
-    <form onSubmit={handleSubmit}>
+    <form id="submitForm" onSubmit={handleSubmit}>
 
       {/* <label htmlFor="appliedDate">Applied Date</label>
       <input type="date" id="appliedDate" name="appliedDate" required /> */}
@@ -98,14 +110,16 @@ export default function PageWithJSbasedForm() {
               required
               id="companyName"
               name="companyName"
-              // value={companyName}
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
               label="Company Name"
             />
             <TextField
               required
               id="location"
               name="location"
-              // value={location}
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               label="Location"
             />
           </Grid>
@@ -114,14 +128,16 @@ export default function PageWithJSbasedForm() {
               required
               id="title"
               name="title"
-              // value={title}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               label="Job Title"
             />
             <TextField
               required
               id="skills"
               name="skills"
-              // value={skills}
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
               label="Skills Required"
             />
             <FormControl sx={{justifyContent:"center", width: 240, mx:3}}>
@@ -130,7 +146,9 @@ export default function PageWithJSbasedForm() {
                 required
                 id="select-status"
                 name="status"
-                defaultValue={"Pending"}
+                defaultValue={status}
+                onChange={(e) => setStatus(e.target.value)}
+                value={status}
               >
                 <MenuItem disabled value="">
                   <em>Status</em>

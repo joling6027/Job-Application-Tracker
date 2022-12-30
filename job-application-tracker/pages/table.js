@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { styled } from "@mui/material/styles";
-import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
-import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
+import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Select, MenuItem, Alert } from "@mui/material";
+import { DataGrid, GridToolbar, GridActionsCellItem, useGridApiRef, useGridApiEventHandler, useGridApiContext } from '@mui/x-data-grid';
 import moment from "moment-timezone";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { yellow } from '@mui/material/colors';
 // import JobApplied from "../models/jobModel";
 
 const header = ['Applied Date', 'Company name', 'Location', 'Job Title', 'Skills Required', 'Status', 'Edit', 'Delete']
@@ -23,9 +22,12 @@ const header = ['Applied Date', 'Company name', 'Location', 'Job Title', 'Skills
 
 const JobListTable = ({ jobs }) => {
   // console.log(jobs);
+  // const apiRef = useGridApiContext();
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [deleteJob, setDeleteJob] = React.useState();
+  const [message, setMessage] = React.useState();
+  // const [status, setStatus] = React.useState();
 
   const handleClickOpen = (jobId) => {
     setDeleteJob(jobId)
@@ -42,7 +44,7 @@ const JobListTable = ({ jobs }) => {
       field: 'appliedDate',
       headerName: 'Applied Date',
       width: 150,
-      editable: true,
+      editable: false,
       sortable: true,
       valueFormatter: params =>
         moment(params?.value).format("YYYY/MM/DD"),
@@ -56,7 +58,7 @@ const JobListTable = ({ jobs }) => {
       field: 'location',
       headerName: 'Location',
       width: 180,
-      editable: true,
+      editable: false,
     },
     {
       field: 'title',
@@ -68,15 +70,34 @@ const JobListTable = ({ jobs }) => {
       field: 'skills',
       headerName: 'Skills Required',
       width: 180,
-      editable: true,
+      editable: false,
     },
     {
       field: 'status',
       headerName: 'Status',
       width: 180,
       editable: true,
-      type: "singleSelect",
-      valueOptions: ["Pending", "Rejected", "Interview Scheduled", "Offer received"],
+      // type: "singleSelect",
+      // valueOptions: ["Pending", "Rejected", "Interview Scheduled", "Offer received"],
+      renderCell: (params) => (
+        <Select
+          required
+          id="select-status"
+          name="status"
+          defaultValue={params.row.status}
+          sx={{ width: "100%", boxShadow: 'none', '.MuiOutlinedInput-notchedOutline': { border: 0 } }}
+          onChange={(e) => handleStatusOnChange(e.target.value, params.row.companyName)}
+          // value={status}
+        >
+          <MenuItem disabled value="">
+            <em>Status</em>
+          </MenuItem>
+          <MenuItem value={"Pending"}>Pending</MenuItem>
+          <MenuItem value={"Rejected"}>Rejected</MenuItem>
+          <MenuItem value={"Interview Scheduled"}>Interview Scheduled</MenuItem>
+          <MenuItem value={"Offer received"}>Offer received</MenuItem>
+        </Select>
+      )
     },
     // {
     //   field: 'icon_edit', headerName: 'Edit', flex: 1, renderCell: (params) => <EditIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="success" />
@@ -93,7 +114,6 @@ const JobListTable = ({ jobs }) => {
         <GridActionsCellItem
           icon={<DeleteIcon />}
           label="Delete"
-          // onClick={() => handleDelete(params.row._id)}
           onClick={() => handleClickOpen(params.row._id)}
           color="error"
         />,
@@ -111,13 +131,29 @@ const JobListTable = ({ jobs }) => {
     //fetch data again to refresh
     if (data.acknowledged) {
       handleClose();
-      refreshData();
+      // refreshData();
     }
   }
+
+  const handleStatusOnChange = (newStatus, companyName) => {
+    console.log(newStatus);
+    //set message for alert
+    setMessage(`The status for application at ${companyName} has been changed to "${newStatus}"`)
+    //save data to db
+  }
+
+  // useGridApiEventHandler(apiRef, 'editCellPropsChange', handleCellDataChange);
 
   const refreshData = () => {
     router.replace(router.asPath);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+    },5000)
+    
+  },[message])
 
 
   return (
@@ -142,6 +178,7 @@ const JobListTable = ({ jobs }) => {
           },
         }}
       />
+      {message && <Alert severity='info'>{message}</Alert>}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -151,15 +188,9 @@ const JobListTable = ({ jobs }) => {
         <DialogTitle id="delete-dialog-title">
           {"Are you sure you want to delete this job application record?"}
         </DialogTitle>
-        {/* <DialogContent>
-          <DialogContentText id="delete-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent> */}
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={() => handleDelete(deleteJob)} autoFocus>
+          <Button onClick={handleClose} autoFocus>Cancel</Button>
+          <Button onClick={() => handleDelete(deleteJob)}>
             Confirm
           </Button>
         </DialogActions>
