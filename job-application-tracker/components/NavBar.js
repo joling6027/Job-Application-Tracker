@@ -5,10 +5,11 @@ const NavBar = () => {
   return ( 
     <nav>
       <div className="logo">
-        <Image src="/JobApplicationTracker_logo.png" alt="" width={128} height={70} />
+        <Image src="/Job_application_tracker_logo.png" alt="" width={128} height={100} />
       </div>
       <Link href="/">Home</Link>
       <Link href="/joblist">Job List</Link>
+      <Link href="/statistic">Statistic</Link>
       <Link href="/about">About</Link>
     </nav>
    );

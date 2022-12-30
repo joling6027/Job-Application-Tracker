@@ -6,6 +6,7 @@ import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
 import moment from "moment-timezone";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { yellow } from '@mui/material/colors';
 // import JobApplied from "../models/jobModel";
 
 const header = ['Applied Date', 'Company name', 'Location', 'Job Title', 'Skills Required', 'Status', 'Edit', 'Delete']
@@ -50,7 +51,6 @@ const JobListTable = ({ jobs }) => {
       field: 'companyName',
       headerName: 'Company name',
       width: 180,
-      editable: true,
     },
     {
       field: 'location',
@@ -133,6 +133,14 @@ const JobListTable = ({ jobs }) => {
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
         getRowId={Math.random}
+        sx={{
+          '.MuiDataGrid-columnSeparator': {
+            display: 'none',
+          },
+          '&.MuiDataGrid-root': {
+            border: 'none',
+          },
+        }}
       />
       <Dialog
         open={open}
