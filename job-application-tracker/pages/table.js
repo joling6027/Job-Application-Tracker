@@ -170,9 +170,10 @@ const JobListTable = ({ jobs }) => {
 
   return (
     <Box sx={{
-      height: 400,
+      height: 600,
       width: '100%'
     }}>
+      {message && <Alert severity='info'>{message}</Alert>}
       <DataGrid
         rows={jobs}
         columns={columns}
@@ -190,7 +191,7 @@ const JobListTable = ({ jobs }) => {
           },
         }}
       />
-      {message && <Alert severity='info'>{message}</Alert>}
+      
       <Dialog
         open={open}
         onClose={handleClose}
