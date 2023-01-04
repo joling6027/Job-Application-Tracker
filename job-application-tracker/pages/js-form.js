@@ -37,31 +37,36 @@ export default function EnterJobApplicationForm() {
     // const newValue = moment(value).tz("America/Los_Angeles").format()
     const newValue = moment(value).toISOString()
 
+    //handle skills data, from string to array
+    const skillArr = skills.split(', ');
+    console.log(skillArr);
+
     // Get data from the form.
     const data = {
       appliedDate: newValue,
       companyName: event.target.companyName.value,
       location: event.target.location.value,
       title: event.target.title.value,
-      skills: event.target.skills.value,
+      skills: skillArr,
       status: event.target.status.value
     }
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data)
-
+    console.log(data)
     // API endpoint where we send form data.
     const endpoint = '/api/test/add'
 
     // Form the request for sending data to the server.
+    // The method is POST because we are sending data.
+    // Tell the server we're sending JSON.
+    // Body of the request is the JSON data we created above.
     const options = {
-      // The method is POST because we are sending data.
+
       method: 'POST',
-      // Tell the server we're sending JSON.
       headers: {
         'Content-Type': 'application/json',
       },
-      // Body of the request is the JSON data we created above.
       body: JSONdata,
     }
 

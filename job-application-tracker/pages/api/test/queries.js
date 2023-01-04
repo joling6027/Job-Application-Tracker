@@ -37,8 +37,19 @@ export default async function handler(req, res) {
         { $sort: { x: 1 } },
         { $limit: 6 }
       ])
+      const skillsCount = await JobApplied.aggregate([
+        { $unwind: "$skills" },
+        { $group: { _id: "$skills", value: { $sum: { $toInt: 1 } } } },
+        {
+          $project: {
+            _id: 0,
+            id: "$_id",
+            value: 1
+          }
+        }
+      ])
 
-      res.status(200).json({ status_stat, jobAppliedCount })
+      res.status(200).json({ status_stat, jobAppliedCount, skillsCount })
 
     } catch (error) {
       res.status(400).json({ success: false })

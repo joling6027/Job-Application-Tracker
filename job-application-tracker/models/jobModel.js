@@ -8,7 +8,7 @@ const jobSchema = new Schema({
   companyName: {type: String, required: true},
   location: { type: String, required: true },
   title: { type: String, required: true },
-  skills: { type: String, required: true },
+  skills: {type: [String], required: true},
   status: {type: String, required: true},
 }, {
   timestamps: {
@@ -20,5 +20,7 @@ const jobSchema = new Schema({
 // const JobApplied = models.JobApplied || model('JobApplied', jobSchema)  //check first if there's a existing model called JobApplied to avoid error
 
 // export default JobApplied;
+
+// console.log(jobSchema.path('skills') instanceof mongoose.Schema.Types.String)
 
 module.exports = mongoose.models?.JobApplied || mongoose.model('JobApplied', jobSchema)

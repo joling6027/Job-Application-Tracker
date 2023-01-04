@@ -17,15 +17,17 @@ export const getServerSideProps = async () => {
       return {
       props: {
           status_stat: JSON.parse(JSON.stringify(data.status_stat)),
-          jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount))
+          jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount)),
+          skillsCount: JSON.parse(JSON.stringify(data.skillsCount))
       },
     };
 }
 
-const Statistic = ({ status_stat, jobAppliedCount }) => {
+const Statistic = ({ status_stat, jobAppliedCount, skillsCount }) => {
 
   console.log(jobAppliedCount)
   console.log(status_stat)
+  console.log(skillsCount)
 
   const data_line = [
     {
@@ -48,7 +50,7 @@ const Statistic = ({ status_stat, jobAppliedCount }) => {
         <Grid item xs={6}>
           <h1>Skills Required</h1>
           <Box sx={{ width: 600, height: 300 }}>
-            <MyResponsivePie data={pieData}/>
+          <MyResponsivePie data={skillsCount}/>
           </Box>
         </Grid>
         <Grid item xs={6}>
@@ -67,7 +69,7 @@ const Statistic = ({ status_stat, jobAppliedCount }) => {
               </Typography>
               <Typography variant="h5" gutterBottom>Total Application sent: </Typography>
               {status_stat && status_stat.map((stat) => (
-                <Typography variant="h5" gutterBottom>{stat.status}: {stat.count}</Typography>
+                <Typography variant="h5" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
               ))}
             </CardContent>
           </CardActionArea>

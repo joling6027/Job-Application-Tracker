@@ -8,18 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 // import JobApplied from "../models/jobModel";
 
-const header = ['Applied Date', 'Company name', 'Location', 'Job Title', 'Skills Required', 'Status', 'Edit', 'Delete']
-
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     backgroundColor: theme.palette.common.black,
-//     color: theme.palette.common.white,
-//   },
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 14,
-//   },
-// }));
-
 const JobListTable = ({ jobs }) => {
   // console.log(jobs);
   // const apiRef = useGridApiContext();
