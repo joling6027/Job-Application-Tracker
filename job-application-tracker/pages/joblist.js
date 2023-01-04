@@ -35,7 +35,7 @@ const JobList = ({jobs}) => {
   return ( 
     <>
       <h1>Job Application List</h1>
-      <p>Here shows the job you have already applied</p>
+      <p>Here shows the jobs you have already applied</p>
       <JobListTable jobs={jobs}/>
     </>
    );

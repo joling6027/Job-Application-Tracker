@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 
 
 const jobSchema = new Schema({
-  appliedDate: {type: String, required: true},
+  appliedDate: {type: Date, required: true},
   companyName: {type: String, required: true},
   location: { type: String, required: true },
   title: { type: String, required: true },

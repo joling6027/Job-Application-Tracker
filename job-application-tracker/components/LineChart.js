@@ -22,12 +22,13 @@ const MyResponsiveLine = ({ data }) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: 'transportation',
+      legend: 'month',
       legendOffset: 36,
       legendPosition: 'middle'
     }}
     axisLeft={{
       orient: 'left',
+      format: e => Math.floor(e) === e && e,
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,

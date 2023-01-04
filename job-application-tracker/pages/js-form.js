@@ -34,7 +34,8 @@ export default function EnterJobApplicationForm() {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
-    const newValue = moment(value).tz("America/Los_Angeles").format()
+    // const newValue = moment(value).tz("America/Los_Angeles").format()
+    const newValue = moment(value).toISOString()
 
     // Get data from the form.
     const data = {

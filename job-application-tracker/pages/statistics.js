@@ -5,8 +5,36 @@ import data from '../data/data';
 import pieData from '../data/data_pie';
 import barData from '../data/data_bar';
 import { Box, Grid, Typography, Card, CardContent, CardActionArea } from '@mui/material';
+import moment from 'moment/moment';
 
-const Statistic = () => {
+export const getServerSideProps = async () => {
+  const URL = "http://localhost:3000"
+  const endpoint = '/api/test/queries'
+
+  const response = await fetch(URL + endpoint)
+  const data = await response.json();
+  // console.log(data)
+      return {
+      props: {
+          status_stat: JSON.parse(JSON.stringify(data.status_stat)),
+          jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount))
+      },
+    };
+}
+
+const Statistic = ({ status_stat, jobAppliedCount }) => {
+
+  console.log(jobAppliedCount)
+  console.log(status_stat)
+
+  const data_line = [
+    {
+      "id": "Job Applied",
+      "data": jobAppliedCount
+    }
+  ]
+  
+
   return (
     // <div className="statistic">
 
@@ -14,7 +42,7 @@ const Statistic = () => {
         <Grid item xs={6}>
           <h1>Job Applied Each Month</h1>
           <Box sx={{ width: 550, height: 300 }}>
-            <MyResponsiveLine data={data} />
+          <MyResponsiveLine data={data_line} />
           </Box>
         </Grid>
         <Grid item xs={6}>
@@ -30,22 +58,19 @@ const Statistic = () => {
           </Box>
         </Grid>
         <Grid item xs={6}>
-        <h1>Status Statistic</h1>
+        <h1>Status Statistics</h1>
         <Card sx={{ maxWidth: 550, height: 300 }}>
-          {/* <CardActionArea sx={{ maxWidth: 550, height: 300 }}> */}
+          <CardActionArea sx={{ maxWidth: 550, height: 300 }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                As For Today (2023/01/02)
+              <Typography gutterBottom variant="h4" component="div">
+                As of Today ({moment().format('LL')})
               </Typography>
-              <Typography variant="body2" color="text.secondary">
-                <h3>Total Application sent:</h3>
-                <h3>Pending:</h3>
-                <h3>Rejected:</h3>
-                <h3>Interview Scheduled:</h3>
-                <h3>Offer Received:</h3>
-              </Typography>
+              <Typography variant="h5" gutterBottom>Total Application sent: </Typography>
+              {status_stat && status_stat.map((stat) => (
+                <Typography variant="h5" gutterBottom>{stat.status}: {stat.count}</Typography>
+              ))}
             </CardContent>
-          {/* </CardActionArea> */}
+          </CardActionArea>
         </Card>
         </Grid>
       </Grid>
