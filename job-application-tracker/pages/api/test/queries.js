@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   await connectMongodb();
   if(method === 'GET'){
     try {
+      const applicationCount = await JobApplied.find({}).count();
       const status_stat = await JobApplied.aggregate([
         { $match: { status: { $exists: true } } },
         { $group: { _id: "$status", count: { $sum: 1 } } },
@@ -49,7 +50,19 @@ export default async function handler(req, res) {
         }
       ])
 
-      res.status(200).json({ status_stat, jobAppliedCount, skillsCount })
+      //location distribution
+      const locationDistribution = await JobApplied.aggregate([
+        { $group: { _id: "$location", count: { $sum: 1 } } },
+        {
+          $project: {
+            _id: 0,
+            city: "$_id",
+            jobs: "$count"
+          }
+        }
+      ])
+
+      res.status(200).json({ status_stat, jobAppliedCount, skillsCount, applicationCount, locationDistribution })
 
     } catch (error) {
       res.status(400).json({ success: false })

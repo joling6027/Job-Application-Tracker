@@ -18,16 +18,20 @@ export const getServerSideProps = async () => {
       props: {
           status_stat: JSON.parse(JSON.stringify(data.status_stat)),
           jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount)),
-          skillsCount: JSON.parse(JSON.stringify(data.skillsCount))
+          skillsCount: JSON.parse(JSON.stringify(data.skillsCount)),
+          applicationCount: JSON.parse(JSON.stringify(data.applicationCount)),
+          locationDistribution: JSON.parse(JSON.stringify(data.locationDistribution))
       },
     };
 }
 
-const Statistic = ({ status_stat, jobAppliedCount, skillsCount }) => {
+const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount, locationDistribution }) => {
 
   console.log(jobAppliedCount)
   console.log(status_stat)
   console.log(skillsCount)
+  console.log(applicationCount)
+  console.log(locationDistribution)
 
   const data_line = [
     {
@@ -43,31 +47,31 @@ const Statistic = ({ status_stat, jobAppliedCount, skillsCount }) => {
     <Grid container spacing={2} sx={{ height: 1000 }}>
         <Grid item xs={6}>
           <h1>Job Applied Each Month</h1>
-          <Box sx={{ width: 550, height: 300 }}>
+          <Box sx={{ height: 300 }}>
           <MyResponsiveLine data={data_line} />
           </Box>
         </Grid>
         <Grid item xs={6}>
           <h1>Skills Required</h1>
-          <Box sx={{ width: 600, height: 300 }}>
+          <Box sx={{ height: 300 }}>
           <MyResponsivePie data={skillsCount}/>
           </Box>
         </Grid>
         <Grid item xs={6}>
         <h1>Location Distribution</h1>
-          <Box sx={{ width: 550, height: 300 }}>
-            <MyResponsiveBar data={barData} />
+          <Box sx={{ height: 300 }}>
+          <MyResponsiveBar data={locationDistribution} />
           </Box>
         </Grid>
         <Grid item xs={6}>
         <h1>Status Statistics</h1>
-        <Card sx={{ maxWidth: 550, height: 300 }}>
+        <Card sx={{ height: 300 }}>
           <CardActionArea sx={{ maxWidth: 550, height: 300 }}>
             <CardContent>
               <Typography gutterBottom variant="h4" component="div">
                 As of Today ({moment().format('LL')})
               </Typography>
-              <Typography variant="h5" gutterBottom>Total Application sent: </Typography>
+              <Typography variant="h5" gutterBottom>Total Application sent: {applicationCount}</Typography>
               {status_stat && status_stat.map((stat) => (
                 <Typography variant="h5" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
               ))}

@@ -29,17 +29,18 @@ const MyResponsiveLine = ({ data }) => (
     axisLeft={{
       orient: 'left',
       format: e => Math.floor(e) === e && e,
-      tickSize: 5,
+      tickSize: 6,
       tickPadding: 5,
       tickRotation: 0,
       legend: 'count',
       legendOffset: -40,
       legendPosition: 'middle'
     }}
-    lineWidth={10}
+    lineWidth={6}
+    enablePoints={true}
     pointSize={13}
-    // pointColor={{ theme: 'background' }}
-    pointBorderWidth={2}
+    pointColor={{ theme: 'background' }}
+    pointBorderWidth={8}
     pointBorderColor={{ from: 'serieColor' }}
     pointLabelYOffset={-12}
     useMesh={true}

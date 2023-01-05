@@ -31,7 +31,7 @@ const JobListTable = ({ jobs }) => {
     {
       field: 'appliedDate',
       headerName: 'Applied Date',
-      width: 150,
+      width: 120,
       editable: false,
       sortable: true,
       valueFormatter: params =>
@@ -40,30 +40,30 @@ const JobListTable = ({ jobs }) => {
     {
       field: 'companyName',
       headerName: 'Company name',
-      width: 180,
+      flex: 1
     },
     {
       field: 'location',
       headerName: 'Location',
-      width: 180,
+      flex: 1,
       editable: false,
     },
     {
       field: 'title',
       headerName: 'Job Title',
       sortable: false,
-      width: 220,
+      flex: 1,
     },
     {
       field: 'skills',
       headerName: 'Skills Required',
-      width: 180,
+      flex: 1,
       editable: false,
     },
     {
       field: 'status',
       headerName: 'Status',
-      width: 180,
+      flex: 1,
       editable: true,
       // type: "singleSelect",
       // valueOptions: ["Pending", "Rejected", "Interview Scheduled", "Offer received"],

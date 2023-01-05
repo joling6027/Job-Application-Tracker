@@ -4,19 +4,19 @@ const MyResponsiveBar = ({ data /* see data tab */ }) => (
   <ResponsiveBar
     data={data}
     keys={[
-      'hot dog',
-      'burger',
-      'sandwich',
-      'kebab',
-      'fries',
-      'donut'
+      // 'IT Support',
+      // 'Front end',
+      // 'Back end',
+      // 'Full stack',
+      // 'Software engineer',
+      'jobs'
     ]}
     indexBy="city"
     margin={{ top: 50, right: 130, bottom: 50, left: 50 }}
     padding={0.3}
     valueScale={{ type: 'linear' }}
     indexScale={{ type: 'band', round: true }}
-    colors={{ scheme: 'nivo' }}
+    colors={{ scheme: 'set3' }}
     defs={[
       {
         id: 'dots',
