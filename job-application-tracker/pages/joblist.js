@@ -4,15 +4,12 @@ import JobApplied from "../models/jobModel";
 
 export const getServerSideProps = async () => {
   try {
-    console.log('CONNECTION TO MONGO');
-
+    // console.log('CONNECTION TO MONGO');
     await connectMongodb();
-    console.log('CONNECTED TO MONGODB');
-
-    console.log('FETCHING DOCUMENT');
+    // console.log('CONNECTED TO MONGODB');
+    // console.log('FETCHING DOCUMENT');
     const jobs = await JobApplied.find().sort({ updated_at: -1});
-
-    console.log('DOCUMENT FETCHED');
+    // console.log('DOCUMENT FETCHED');
 
     return {
       props: {

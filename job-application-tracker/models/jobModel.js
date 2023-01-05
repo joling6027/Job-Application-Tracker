@@ -12,15 +12,13 @@ const jobSchema = new Schema({
   status: {type: String, required: true},
 }, {
   timestamps: {
-    createdAt: 'created_at', // Use `created_at` to store the created date
-    updatedAt: 'updated_at' // and `updated_at` to store the last updated date
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   }
 })
 
 // const JobApplied = models.JobApplied || model('JobApplied', jobSchema)  //check first if there's a existing model called JobApplied to avoid error
 
 // export default JobApplied;
-
-// console.log(jobSchema.path('skills') instanceof mongoose.Schema.Types.String)
 
 module.exports = mongoose.models?.JobApplied || mongoose.model('JobApplied', jobSchema)

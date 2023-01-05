@@ -5,8 +5,6 @@ import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTit
 import { DataGrid, GridToolbar, GridActionsCellItem, useGridApiRef, useGridApiEventHandler, useGridApiContext } from '@mui/x-data-grid';
 import moment from "moment-timezone";
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-// import JobApplied from "../models/jobModel";
 
 const JobListTable = ({ jobs }) => {
   // console.log(jobs);
@@ -85,12 +83,6 @@ const JobListTable = ({ jobs }) => {
         </Select>
       )
     },
-    // {
-    //   field: 'icon_edit', headerName: 'Edit', flex: 1, renderCell: (params) => <EditIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="success" />
-    // },
-    // {
-    //   field: 'icon_delete', headerName: 'Delete', flex: 1, renderCell: (params) => <DeleteIcon value={params.row.id} onClick={() => handleDelete(params.row.id)} color="error" />
-    // },
     {
       field: 'actions',
       type: 'actions',
@@ -108,12 +100,12 @@ const JobListTable = ({ jobs }) => {
   ];
 
   const handleDelete = async (jobid) => {
-    console.log(jobid);
+    // console.log(jobid);
     const response = await fetch(`/api/test/${jobid}`, {
       method: 'DELETE'
     })
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     //fetch data again to refresh
     if (data.acknowledged) {
       handleClose();
@@ -138,11 +130,9 @@ const JobListTable = ({ jobs }) => {
       body: JSONData
     })
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
     refreshData();
   }
-
-  // useGridApiEventHandler(apiRef, 'editCellPropsChange', handleCellDataChange);
 
   const refreshData = () => {
     router.replace(router.asPath);

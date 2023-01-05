@@ -1,14 +1,13 @@
 import React from "react";
+import { useEffect } from "react";
 import moment from "moment-timezone";
-import { Button, TextField, Stack, Box, Paper, Grid, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { Button, TextField, Stack, Box, Paper, Grid, Select, MenuItem, InputLabel, FormControl, Alert } from "@mui/material";
 
 import SendIcon from '@mui/icons-material/Send';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 // import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
-
-
 
 export default function EnterJobApplicationForm() {
   moment.tz.setDefault('America/Los_Angeles')
@@ -19,6 +18,8 @@ export default function EnterJobApplicationForm() {
   const [location, setLocation] = React.useState();
   const [skills, setSkills] = React.useState();
   const [status, setStatus] = React.useState("Pending");
+
+  const [message, setMessage] = React.useState();
 
   const resetForm = () => {
     setLocation("");
@@ -39,7 +40,6 @@ export default function EnterJobApplicationForm() {
 
     //handle skills data, from string to array
     const skillArr = skills.split(', ');
-    console.log(skillArr);
 
     // Get data from the form.
     const data = {
@@ -53,7 +53,7 @@ export default function EnterJobApplicationForm() {
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data)
-    console.log(data)
+    // console.log(data)
     // API endpoint where we send form data.
     const endpoint = '/api/test/add'
 
@@ -73,17 +73,27 @@ export default function EnterJobApplicationForm() {
     // Send the form data to our forms API on Vercel and get a response.
     const response = await fetch(endpoint, options)
 
-    console.log(response)
+    // console.log(response)
     // Get the response data from server as JSON.
     // If server returns the name submitted, that means the form works.
     const result = await response.json()
-    console.log(result)
-    alert(`Your data sending status: ${result.success}`)
-    // event.target.reset();
+    // console.log(result)
+
+    setMessage(`Great! You have successfully submitted!`)
     resetForm();
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+    }, 3000)
+
+  }, [message])
+
   return (
     // We pass the event to the handleSubmit() function on submit.
+    <>
+    {message && <Alert severity='success' sx={{m: 3}}>{message}</Alert>}
     <form id="submitForm" onSubmit={handleSubmit}>
 
       {/* <label htmlFor="appliedDate">Applied Date</label>
@@ -173,5 +183,6 @@ export default function EnterJobApplicationForm() {
       </Box>
 
     </form>
+    </>
   )
 }

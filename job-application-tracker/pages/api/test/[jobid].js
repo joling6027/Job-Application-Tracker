@@ -29,7 +29,6 @@ export default async function handler(req, res) {
       break;
     case 'PUT':
       try {
-        // console.log("i'm in put request")
         const updateJob = await JobApplied.updateOne(
           { _id: jobid }, { $set: {status: req.body.status}
         })

@@ -11,7 +11,6 @@ export default function Home() {
   return (
     <div>
       <h1 className={styles.title}>Enter The Job You Just Applied</h1>
-      {/* <p className={styles.text}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga voluptatibus, aliquam accusamus incidunt soluta nisi vero repudiandae blanditiis asperiores unde aut laudantium sint nesciunt facilis ab impedit error, consectetur quidem.</p> */}
       <EnterJobApplicationForm />
     </div>
   )
