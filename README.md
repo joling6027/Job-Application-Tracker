@@ -2,11 +2,11 @@
 Job application tracker is a tool that helps job seekers manage and organize the jobs they have applied to. It allows users to keep track of their job applications, including the job title, company, and date applied.
 
 ## Table of Contents
-- [Installation & Usage](#Installation & Usage)
+- [Installation & Usage](#installationusage)
 - [Examples](#examples)
 - [Contributing](#contributing)
 
-## Installation & Usage
+## Installation&Usage
 
 To install and run Job Application Tracker, follow these steps:
 1. Make sure you have Node.js and MongoDB installed.
