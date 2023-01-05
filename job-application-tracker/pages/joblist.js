@@ -28,7 +28,6 @@ export const getServerSideProps = async () => {
 
 const JobList = ({jobs}) => {
 
-  console.log(jobs)
   return ( 
     <>
       <h1>Job Application List</h1>

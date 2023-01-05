@@ -27,12 +27,6 @@ export const getServerSideProps = async () => {
 
 const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount, locationDistribution }) => {
 
-  console.log(jobAppliedCount)
-  console.log(status_stat)
-  console.log(skillsCount)
-  console.log(applicationCount)
-  console.log(locationDistribution)
-
   const data_line = [
     {
       "id": "Job Applied",
@@ -66,17 +60,17 @@ const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount
         <Grid item xs={6}>
         <h1>Status Statistics</h1>
         <Card sx={{ height: 300 }}>
-          <CardActionArea sx={{ maxWidth: 550, height: 300 }}>
+          {/* <CardActionArea sx={{ maxWidth: 550, height: 300 }}> */}
             <CardContent>
-              <Typography gutterBottom variant="h4" component="div">
+              <Typography gutterBottom variant="h5" component="div">
                 As of Today ({moment().format('LL')})
               </Typography>
-              <Typography variant="h5" gutterBottom>Total Application sent: {applicationCount}</Typography>
+              <Typography variant="h6" gutterBottom>Total Application sent: {applicationCount}</Typography>
               {status_stat && status_stat.map((stat) => (
-                <Typography variant="h5" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
+                <Typography variant="h6" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
               ))}
             </CardContent>
-          </CardActionArea>
+          {/* </CardActionArea> */}
         </Card>
         </Grid>
       </Grid>
