@@ -2,13 +2,13 @@
 Job application tracker is a tool that helps job seekers manage and organize the jobs they have applied to. It allows users to keep track of their job applications, including the job title, company, and date applied.
 
 ## Table of Contents
-- [Installation & Usage](#installation)
+- [Installation & Usage](#Installation & Usage)
 - [Examples](#examples)
 - [Contributing](#contributing)
 
 ## Installation & Usage
 
-To install and set up TeamSavvy, follow these steps:
+To install and run Job Application Tracker, follow these steps:
 1. Make sure you have Node.js and MongoDB installed.
 2. Clone the repository to your local folder.
 3. Navigate to the folder, first run `npm intall` to install the dependencies and then run `npm run dev` to run the program.
