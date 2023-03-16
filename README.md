@@ -1,6 +1,8 @@
 # Job-Application-Tracker
 Job application tracker is a tool that helps job seekers manage and organize the jobs they have applied to. It allows users to keep track of their job applications, including the job title, company, and date applied.
 
+Demo: [Job application Tracker](https://job-application-tracker-pgl7-u86s76hbw-joling6027.vercel.app/)
+
 ## Table of Contents
 - [Installation & Usage](#installationusage)
 - [Examples](#examples)
@@ -19,13 +21,13 @@ To install and run Job Application Tracker, follow these steps:
 ## Examples
 
 1. Enter the job you just applied
-<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/job-application-tracker/public/JAT_index.JPG" alt="enter new job application" style="height: 300px; width:550px;"/>
+<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/JAT_index.JPG" alt="enter new job application" style="height: 300px; width:550px;"/>
 
 2. Manage your records ( update status or simply delete it)
-<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/job-application-tracker/public/JAT_joblist.JPG" alt="job list" style="height: 300px; width:550px;"/>
+<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/public/JAT_joblist.JPG" alt="job list" style="height: 300px; width:550px;"/>
 
 3. Personalized statistics
-<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/job-application-tracker/public/JAT_statistics.JPG" alt="job list" style="height: 300px; width:550px;"/>
+<img src="https://github.com/joling6027/Job-Application-Tracker/blob/main/public/JAT_statistics.JPG" alt="job list" style="height: 300px; width:550px;"/>
 
 ## Contributing
 
