@@ -5,6 +5,7 @@ import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTit
 import { DataGrid, GridToolbar, GridActionsCellItem, useGridApiRef, useGridApiEventHandler, useGridApiContext } from '@mui/x-data-grid';
 import moment from "moment-timezone";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteData, statusOnChange } from '../lib/api';
 
 const JobListTable = ({ jobs }) => {
   // console.log(jobs);
@@ -101,10 +102,12 @@ const JobListTable = ({ jobs }) => {
 
   const handleDelete = async (jobid) => {
     // console.log(jobid);
-    const response = await fetch(`/api/test/${jobid}`, {
-      method: 'DELETE'
-    })
-    const data = await response.json()
+    // const response = await fetch(`/api/test/${jobid}`, {
+    //   method: 'DELETE'
+    // })
+    // const data = await response.json()
+
+    deleteData(jobid);
     // console.log(data)
     //fetch data again to refresh
     if (data.acknowledged) {
@@ -114,7 +117,6 @@ const JobListTable = ({ jobs }) => {
   }
 
   const handleStatusOnChange = async (newStatus, companyName, jobid) => {
-    console.log(newStatus);
     //set message for alert
     setMessage(`The status for application at ${companyName} has been changed to "${newStatus}"`)
     //save data to db
@@ -122,15 +124,18 @@ const JobListTable = ({ jobs }) => {
       status: newStatus
     }
     const JSONData = JSON.stringify(statusData)
-    const response = await fetch(`/api/test/${jobid}`,{
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSONData
-    })
-    const data = await response.json()
+    
+    statusOnChange(jobid, JSONData);
+    // const response = await fetch(`/api/test/${jobid}`,{
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSONData
+    // })
+    // const data = await response.json()
     // console.log(data)
+
     refreshData();
   }
 
