@@ -1,14 +1,15 @@
 import MyResponsiveLine from '../components/LineChart'
 import MyResponsivePie from '../components/PieChart'
 import MyResponsiveBar from '../components/BarChart';
-import data from '../data/data';
-import pieData from '../data/data_pie';
-import barData from '../data/data_bar';
+// import data from '../data/data';
+// import pieData from '../data/data_pie';
+// import barData from '../data/data_bar';
 import { Box, Grid, Typography, Card, CardContent, CardActionArea } from '@mui/material';
 import moment from 'moment/moment';
 
 export const getServerSideProps = async () => {
-  const URL = "http://localhost:3000"
+  // const URL = "http://localhost:3000"
+  const URL = "https://job-application-tracker-pgl7.vercel.app/"
   const endpoint = '/api/test/queries'
 
   const response = await fetch(URL + endpoint)
