@@ -9,21 +9,35 @@ import moment from 'moment/moment';
 
 export const getServerSideProps = async () => {
   // const URL = "http://localhost:3000"
-  const URL = "https://job-application-tracker-pgl7.vercel.app/"
+  const URL = "https://job-application-tracker-pgl7.vercel.app"
   const endpoint = '/api/test/queries'
 
-  const response = await fetch(URL + endpoint)
-  const data = await response.json();
-  // console.log(data)
-      return {
+  try{
+    const response = await fetch(URL + endpoint)
+    const data = await response.json();
+    console.log(data)
+    return {
       props: {
-          status_stat: JSON.parse(JSON.stringify(data.status_stat)),
-          jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount)),
-          skillsCount: JSON.parse(JSON.stringify(data.skillsCount)),
-          applicationCount: JSON.parse(JSON.stringify(data.applicationCount)),
-          locationDistribution: JSON.parse(JSON.stringify(data.locationDistribution))
+        status_stat: JSON.parse(JSON.stringify(data.status_stat)),
+        jobAppliedCount: JSON.parse(JSON.stringify(data.jobAppliedCount)),
+        skillsCount: JSON.parse(JSON.stringify(data.skillsCount)),
+        applicationCount: JSON.parse(JSON.stringify(data.applicationCount)),
+        locationDistribution: JSON.parse(JSON.stringify(data.locationDistribution))
       },
     };
+  }catch(error){
+    console.log(error);
+    return {
+      props:{
+        status_stat:[],
+        jobAppliedCount:[],
+        skillsCount:[],
+        applicationCount:0,
+        locationDistribution:[]
+      },
+    };
+  }
+  
 }
 
 const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount, locationDistribution }) => {
