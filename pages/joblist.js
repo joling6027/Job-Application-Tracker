@@ -1,4 +1,5 @@
-import JobListTable from "./table";
+// import JobListTable from "./table";
+import JobListTable from "../components/table";
 import connectMongodb from "../utility/connectMongodb";
 import JobApplied from "../models/jobModel";
 
