@@ -1,7 +1,7 @@
 # Job-Application-Tracker
 Job application tracker is a tool that helps job seekers manage and organize the jobs they have applied to. It allows users to keep track of their job applications, including the job title, company, and date applied.
 
-Demo: [Job application Tracker](https://job-application-tracker-pgl7-u86s76hbw-joling6027.vercel.app/)
+Demo: [Job application Tracker](https://job-application-tracker-pgl7-e8o2y40fp-joling6027.vercel.app/statistics)
 
 ## Table of Contents
 - [Installation & Usage](#installationusage)
