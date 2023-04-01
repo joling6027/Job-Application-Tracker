@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document'
-import createEmotionServer from '@emotion/server/create-instance';
-import createEmotionCache from '../utility/createEmotionCache';
 
 export default function Document() {
   return (
@@ -13,7 +11,6 @@ export default function Document() {
         />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <link rel="manifest" href="/site.webmanifest"></link>
-        <title>JAT - Job Application Tracker</title>
       </Head>
       <body>
         <Main />

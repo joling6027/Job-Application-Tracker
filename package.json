@@ -32,7 +32,8 @@
     "nivo": "^0.2.0",
     "react": "18.2.0",
     "react-chartjs-2": "^5.1.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-paginate": "^8.1.4"
   },
   "devDependencies": {
     "eslint-config-next": "^13.2.4"
