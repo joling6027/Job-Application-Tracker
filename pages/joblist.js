@@ -1,4 +1,5 @@
 // import JobListTable from "./table";
+import Head from 'next/head'
 import JobListTable from "../components/table";
 import connectMongodb from "../utility/connectMongodb";
 import JobApplied from "../models/jobModel";
@@ -28,9 +29,11 @@ export const getServerSideProps = async () => {
 }
 
 const JobList = ({jobs}) => {
-
   return ( 
     <>
+      <Head>
+        <title>Job Application Tracker - Home</title>
+      </Head>
       <h1>Job Application List</h1>
       <p>Here shows the jobs you have already applied</p>
       <JobListTable jobs={jobs}/>
