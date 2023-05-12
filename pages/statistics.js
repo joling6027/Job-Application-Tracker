@@ -1,18 +1,16 @@
-import MyResponsiveLine from '../components/LineChart'
-import MyResponsivePie from '../components/PieChart'
+import MyResponsiveLine from '../components/LineChart';
+import MyResponsivePie from '../components/PieChart';
 import MyResponsiveBar from '../components/BarChart';
-// import data from '../data/data';
-// import pieData from '../data/data_pie';
-// import barData from '../data/data_bar';
-import { Box, Grid, Typography, Card, CardContent, CardActionArea } from '@mui/material';
+import { Box, Grid, Typography, Card, CardContent } from '@mui/material';
 import moment from 'moment/moment';
+import styles from './statistics.module.css';
 
 export const getServerSideProps = async () => {
   // const URL = "http://localhost:3000"
   const URL = "https://job-application-tracker-pgl7.vercel.app"
   const endpoint = '/api/test/queries'
 
-  try{
+  try {
     const response = await fetch(URL + endpoint)
     const data = await response.json();
     console.log(data)
@@ -25,19 +23,19 @@ export const getServerSideProps = async () => {
         locationDistribution: JSON.parse(JSON.stringify(data.locationDistribution))
       },
     };
-  }catch(error){
+  } catch (error) {
     console.log(error);
     return {
-      props:{
-        status_stat:[],
-        jobAppliedCount:[],
-        skillsCount:[],
-        applicationCount:0,
-        locationDistribution:[]
+      props: {
+        status_stat: [],
+        jobAppliedCount: [],
+        skillsCount: [],
+        applicationCount: 0,
+        locationDistribution: []
       },
     };
   }
-  
+
 }
 
 const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount, locationDistribution }) => {
@@ -48,48 +46,42 @@ const Statistic = ({ status_stat, jobAppliedCount, skillsCount, applicationCount
       "data": jobAppliedCount
     }
   ]
-  
 
   return (
-    // <div className="statistic">
-
-    <Grid container spacing={2} sx={{ height: 1000 }}>
-        <Grid item xs={6}>
-          <h1>Job Applied Each Month</h1>
-          <Box sx={{ height: 300 }}>
+    <div className={styles['chart-container']}>
+      <div className={styles['chart-item']}>
+        <h1>Job Applied Each Month</h1>
+        <Box sx={{ height: 300 }}>
           <MyResponsiveLine data={data_line} />
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
-          <h1>Skills Required</h1>
-          <Box sx={{ height: 300 }}>
-          <MyResponsivePie data={skillsCount}/>
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
+        </Box>
+      </div>
+      <div className={styles['chart-item']}>
+        <h1>Skills Required</h1>
+        <Box sx={{ height: 300, minWidth: 300 }}>
+          <MyResponsivePie data={skillsCount} />
+        </Box>
+      </div>
+      <div className={styles['chart-item']}>
         <h1>Location Distribution</h1>
-          <Box sx={{ height: 300 }}>
+        <Box sx={{ height: 300 }}>
           <MyResponsiveBar data={locationDistribution} />
-          </Box>
-        </Grid>
-        <Grid item xs={6}>
+        </Box>
+      </div>
+      <div className={styles['chart-item']}>
         <h1>Status Statistics</h1>
         <Card sx={{ height: 300 }}>
-          {/* <CardActionArea sx={{ maxWidth: 550, height: 300 }}> */}
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                As of Today ({moment().format('LL')})
-              </Typography>
-              <Typography variant="h6" gutterBottom>Total Application sent: {applicationCount}</Typography>
-              {status_stat && status_stat.map((stat) => (
-                <Typography variant="h6" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
-              ))}
-            </CardContent>
-          {/* </CardActionArea> */}
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              As of Today ({moment().format('LL')})
+            </Typography>
+            <Typography variant="h6" gutterBottom>Total Application sent: {applicationCount}</Typography>
+            {status_stat && status_stat.map((stat) => (
+              <Typography variant="h6" gutterBottom key={Math.random()}>{stat.status}: {stat.count}</Typography>
+            ))}
+          </CardContent>
         </Card>
-        </Grid>
-      </Grid>
-    // </div>
+      </div>
+    </div>
   );
 }
 

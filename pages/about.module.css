@@ -1,0 +1,40 @@
+.about-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.about-content_first {
+  display: flex;
+}
+
+.about-content{
+  background-color: rgb(232, 232, 232);
+  box-shadow: 3px 6px 6px gray;
+  border-radius: 4rem;
+  margin: 1.5rem;
+  padding: 2rem;
+}
+
+.about-content:hover {
+  background-color: aliceblue;
+}
+
+.about-content > p {
+  font-size: large;
+  font-weight: 600;
+}
+
+.about-content > ul > li {
+  font-size: large;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 700px) {
+  .about-content_first {
+      flex-direction: column;
+    }
+  .about-content {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+}

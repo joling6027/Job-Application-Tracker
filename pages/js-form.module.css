@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 3px 6px 6px gray;
 }
 
 .submit-btn:hover {

@@ -174,7 +174,6 @@ const JobListTable = ({ jobs }) => {
           },
         }}
       />
-      
       <Dialog
         open={open}
         onClose={handleClose}
