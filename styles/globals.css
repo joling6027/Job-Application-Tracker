@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
-
-
 body {
   background: #f2f2f2;
   color: #333;
@@ -14,56 +12,34 @@ a {
 }
 
 .content {
-  max-width: 60vw;
-  margin: 0 auto;
-  min-height: 90vh;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .inner-content {
-  position: relative;
-  margin-bottom: 100px;
-}
-
-nav {
-  margin: 2vh auto 5vh;
-  padding: 10px 0;
+  margin-bottom: 10rem;
+  width: 80%;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  border-bottom: 1px solid #ddd;
-}
-
-nav a {
-  margin-left: 12px;
-}
-
-nav a:hover{
-  color: goldenrod;
-}
-
-nav .logo {
-  margin-right: auto;
+  flex-direction: column;
+  align-items: center;
 }
 
 footer {
   display: block;
   text-align: center;
   padding: 1vh 0;
-  /* margin-top: 60px; */
   margin: 0;
   color: #777;
   border-top: 1px solid #eaeaea;
-  /* position: absolute; */
   bottom: 0;
   width: 100%;
-  /* background-color: #4979ff; */
   left: 0;
 }
 
 .not-found {
   text-align: center;
-
 }
 
 .not-found-link {
