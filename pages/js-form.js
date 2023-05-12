@@ -173,7 +173,7 @@ export default function EnterJobApplicationForm() {
           </Grid>
         </Box>
       <Box sx={{ mt: 5 }}>
-        <Button className="submit-btn" variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
+        <Button className={styles['submit-btn']} variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
       </Box>
     </form>
     </>

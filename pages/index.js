@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/home.module.css'
+import styles from './home.module.css'
 import EnterJobApplicationForm from './js-form'
 
 export default function Home() {
