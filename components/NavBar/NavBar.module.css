@@ -16,6 +16,7 @@
 }
 
 .nav-link {
+  box-sizing: border-box;
   margin: 0 2rem;
   font-weight: bold;
   font-size: 1.5rem;
@@ -25,6 +26,15 @@
   color: white;
 }
 
+.active {
+  background-color: white;
+  border-radius: 4rem;
+  padding: 0 1rem ;
+}
+
+.active:hover {
+  color: black;
+}
 
 @media screen and (max-width: 1440px) {
   .navbar {
