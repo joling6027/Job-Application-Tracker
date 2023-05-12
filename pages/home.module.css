@@ -1,6 +1,12 @@
-.title {
+.home-content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-title {
   color: #333;
-  padding-bottom: 20px;
+  margin: 3rem 0;
   text-align: center;
 }
 
@@ -17,4 +23,10 @@
   border-radius: 4px;
   color: white;
   text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .home-title {
+    margin: 1rem 0;
+  }
 }

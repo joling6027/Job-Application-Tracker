@@ -1,0 +1,13 @@
+.submit-application-form{
+  padding: 3rem;
+  width: 60%;
+  border-radius: 4rem;
+  background-color: rgb(232, 232, 232);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-btn:hover {
+  background-color: #18d4d4;
+}

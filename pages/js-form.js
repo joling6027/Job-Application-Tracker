@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import moment from "moment-timezone";
-import { Button, TextField, Stack, Box, Paper, Grid, Select, MenuItem, InputLabel, FormControl, Alert } from "@mui/material";
+import { Button, TextField, Box, Grid, Select, MenuItem, FormControl, Alert } from "@mui/material";
 
 import SendIcon from '@mui/icons-material/Send';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
+import styles from './js-form.module.css';
 
 export default function EnterJobApplicationForm() {
   moment.tz.setDefault('America/Los_Angeles')
@@ -94,11 +93,7 @@ export default function EnterJobApplicationForm() {
     // We pass the event to the handleSubmit() function on submit.
     <>
     {message && <Alert severity='success' sx={{m: 3}}>{message}</Alert>}
-    <form id="submitForm" onSubmit={handleSubmit}>
-
-      {/* <label htmlFor="appliedDate">Applied Date</label>
-      <input type="date" id="appliedDate" name="appliedDate" required /> */}
-      <Paper elevation={3}>
+    <form className={styles['submit-application-form']} onSubmit={handleSubmit}>
         <Box
           sx={{
             '& .MuiTextField-root': { m: 3, width: '25ch' },
@@ -177,11 +172,9 @@ export default function EnterJobApplicationForm() {
             </FormControl>
           </Grid>
         </Box>
-      </Paper>
       <Box sx={{ mt: 5 }}>
-        <Button className="submit-btn" variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
+        <Button className={styles['submit-btn']} variant="contained" type="submit" size="large" endIcon={<SendIcon />} >Submit</Button>
       </Box>
-
     </form>
     </>
   )

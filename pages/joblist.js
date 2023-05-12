@@ -35,7 +35,7 @@ const JobList = ({jobs}) => {
         <title>Job Application Tracker - Home</title>
       </Head>
       <h1>Job Application List</h1>
-      <p>Here shows the jobs you have already applied</p>
+      <h3>Here shows the jobs you have already applied</h3>
       <JobListTable jobs={jobs}/>
     </>
    );
