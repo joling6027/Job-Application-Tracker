@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import { Schema, model, models } from "mongoose";
-import moment from 'moment-timezone';
-
 
 const jobSchema = new Schema({
   appliedDate: {type: Date, required: true},
