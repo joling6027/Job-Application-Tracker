@@ -1,6 +1,7 @@
 .submit-application-form{
   padding: 3rem;
   width: 60%;
+  min-width: 400px;
   border-radius: 4rem;
   background-color: rgb(232, 232, 232);
   display: flex;
@@ -11,4 +12,10 @@
 
 .submit-btn:hover {
   background-color: #18d4d4;
+}
+
+@media screen and (max-width: 600px) {
+  .submit-application-form {
+    width: 90%;
+  }
 }
